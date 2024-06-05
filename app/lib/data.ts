@@ -101,6 +101,8 @@ export async function fetchFilteredInvoices(
   noStore();
 
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+  console.log('Fetching invoices...');
+  console.log('Query:', query);
 
   try {
     const invoices = await sql<InvoicesTable>`
@@ -175,7 +177,7 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
-
+    
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
